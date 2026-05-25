@@ -1,23 +1,792 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+        /* CSS 변수를 활용한 부드럽고 다채로운 현대적 색감 설정 */
+        :root {
+            --primary-color: #3e594c; /* 차분하고 에코 친화적인 세이지 그린 */
+            --primary-hover: #2f443a;
+            --secondary-color: #8fa89b; /* 소프트 세이지 그린 */
+            --accent-color: #c08a64; /* 부드러운 테라코타 황토색 */
+            --bg-color: #faf8f5; /* 아주 연한 샌드 크림톤 배경 */
+            --card-bg: #ffffff;
+            --text-main: #2b2b2b; /* 눈의 피로를 더는 다크 챠콜 */
+            --text-muted: #5c5c5c;
+            --border-color: #e6e1da;
+            --highlight-bg: #f0ede8;
+        }
+
+        /* 기본 레이아웃 및 폰트 설정 */
+        body { 
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+        }
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+
+        /* 헤더 스타일 */
+        header { 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 40px 0; 
+            border-bottom: 4px solid var(--accent-color); 
+            text-align: center;
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.2em; 
+            font-weight: 700; 
+            letter-spacing: -0.5px;
+        }
+        header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            color: var(--secondary-color);
+        }
+
+        /* 네비게이션 스타일 */
+        nav { 
+            background-color: var(--card-bg); 
+            padding: 5px 0; 
+            margin-bottom: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            border: 1px solid var(--border-color);
+        }
+        .main-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: space-around; 
+            flex-wrap: wrap;
+        }
+        .main-menu li { 
+            margin: 0; 
+        }
+        .main-menu li a { 
+            display: block; 
+            padding: 15px 20px; 
+            text-decoration: none; 
+            color: var(--primary-color); 
+            font-weight: 600; 
+            font-size: 1.05em; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        .main-menu li a:hover { 
+            background-color: var(--highlight-bg); 
+            color: var(--primary-hover); 
+            border-radius: 8px; 
+        }
+
+        /* 콘텐츠 래퍼 및 사이드바 레이아웃 (플렉스박스) */
+        .content-wrap { 
+            display: flex; 
+            gap: 30px; 
+        }
+        .sidebar { 
+            flex: 0 0 350px; 
+            padding: 25px; 
+            background-color: var(--card-bg); 
+            border-radius: 16px; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.02); 
+            align-self: flex-start; 
+            border: 1px solid var(--border-color);
+        }
+        .main-content { 
+            flex: 1; 
+            padding: 35px; 
+            background-color: var(--card-bg); 
+            border-radius: 16px; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.02); 
+            border: 1px solid var(--border-color);
+        }
+
+        /* 사이드바 메뉴 */
+        .sidebar h2 { 
+            color: var(--primary-color); 
+            font-size: 1.35em; 
+            margin-top: 0; 
+            border-bottom: 2px solid var(--accent-color); 
+            padding-bottom: 12px; 
+        }
+        .sub-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 20px 0; 
+        }
+        .sub-menu li a { 
+            display: block; 
+            padding: 12px 0; 
+            text-decoration: none; 
+            color: var(--text-muted); 
+            border-bottom: 1px dashed var(--border-color); 
+            transition: color 0.3s, padding-left 0.3s; 
+            font-size: 0.95em;
+        }
+        .sub-menu li a:hover { 
+            color: var(--primary-color); 
+            padding-left: 8px; 
+            font-weight: bold; 
+        }
+
+        /* 폼 섹션 (계산기/상담) */
+        .calculator-section { 
+            background-color: var(--bg-color); 
+            padding: 24px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color); 
+            margin-bottom: 25px; 
+        }
+        .calculator-section h3 { 
+            color: var(--primary-color); 
+            font-size: 1.25em; 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .calculator-section p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .calculator-section label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: 600; 
+            color: var(--text-main); 
+            font-size: 0.9em;
+        }
+        .calculator-section input[type="text"],
+        .calculator-section input[type="number"],
+        .calculator-section select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            margin-top: 6px; 
+            box-sizing: border-box; 
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.95em;
+        }
+        .calculator-section input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        .calculator-section button { 
+            width: 100%; 
+            padding: 14px; 
+            background-color: var(--primary-color); 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 1.05em; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 22px; 
+            transition: background-color 0.3s; 
+        }
+        .calculator-section button:hover { 
+            background-color: var(--primary-hover); 
+        }
+
+        /* 메인 콘텐츠 스타일 */
+        .main-content h2 { 
+            color: var(--primary-color); 
+            font-size: 1.8em; 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 12px; 
+            margin-top: 40px; 
+        }
+        .main-content h3 { 
+            color: var(--text-main); 
+            font-size: 1.4em; 
+            margin-top: 30px; 
+            border-left: 4px solid var(--accent-color); 
+            padding-left: 12px; 
+        }
+        .main-content h4 { 
+            font-size: 1.15em; 
+            color: var(--primary-color); 
+            margin-top: 25px; 
+            margin-bottom: 10px;
+        }
+        .main-content p { 
+            color: var(--text-main); 
+            margin-bottom: 1.2em; 
+            text-align: justify; 
+            font-size: 1.02em;
+        }
+        .main-content ul, .main-content ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .main-content li {
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        /* 강조 박스 */
+        .highlight { 
+            background-color: var(--highlight-bg); 
+            border-left: 4px solid var(--primary-color); 
+            padding: 22px; 
+            border-radius: 8px; 
+            margin: 25px 0; 
+            color: var(--text-main); 
+        }
+        .highlight p { 
+            margin: 0; 
+            line-height: 1.7; 
+            font-weight: 500;
+        }
+
+        /* 표 스타일 */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 25px; 
+            margin-bottom: 25px;
+            font-size: 0.95em; 
+        }
+        table th, table td { 
+            border: 1px solid var(--border-color); 
+            padding: 14px; 
+            text-align: left; 
+        }
+        table th { 
+            background-color: var(--highlight-bg); 
+            color: var(--primary-color); 
+            font-weight: bold; 
+        }
+        table tr:nth-child(even) { 
+            background-color: #fafaf9; 
+        }
+
+        /* 맞춤형 CSS 그래프 시뮬레이션 */
+        .cost-reduction-graph {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .cost-reduction-graph h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .graph-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .graph-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .graph-label {
+            width: 150px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .graph-bar-wrap {
+            flex: 1;
+            background-color: var(--border-color);
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .graph-bar {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            transition: width 1s ease-in-out;
+        }
+        .graph-bar.bar-1 { background-color: var(--accent-color); }
+        .graph-bar.bar-2 { background-color: var(--secondary-color); }
+        .graph-bar.bar-3 { background-color: var(--primary-color); }
+        .graph-bar.bar-4 { background-color: #556b2f; }
+        .graph-val {
+            width: 90px;
+            text-align: right;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        /* 외부 링크 구조화 */
+        .external-links ul { 
+            list-style: none; 
+            padding: 0; 
+            margin-top: 20px; 
+        }
+        .external-links li {
+            margin-bottom: 10px;
+        }
+        .external-links li a { 
+            display: block; 
+            padding: 12px 18px; 
+            background-color: var(--bg-color); 
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: var(--text-main); 
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s, color 0.3s; 
+            font-size: 0.95em;
+        }
+        .external-links li a:hover { 
+            background-color: var(--highlight-bg); 
+            color: var(--primary-color); 
+            border-color: var(--secondary-color);
+        }
+
+        /* 모바일 반응형 디자인 */
+        @media (max-width: 900px) {
+            .content-wrap { flex-direction: column; }
+            .sidebar { width: 100%; margin-bottom: 30px; }
+            .main-content { padding: 20px; }
+            .main-menu { flex-direction: column; align-items: stretch; }
+            .main-menu li a { text-align: center; border-bottom: 1px solid var(--border-color); }
+        }
+
+        /* 실시간 견적 출력 영역 */
+        .calc-output-box {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .calc-output-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 10px 0;
+        }
+        .calc-output-sub {
+            font-size: 0.85em;
+            color: var(--secondary-color);
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data for Search Engine Optimization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "2026 기아 EV8 장기렌트카 가격 및 견적 비교 지침서",
+      "headline": "기아 EV8 장기렌트카 가격 비교 및 2026년 최저가 견적 확보 전략",
+      "description": "기아 차세대 전기차 EV8 장기렌트카 전문 가이드. eM 플랫폼 기반 EV8 롱레인지, RWD, AWD, GT-Line의 월 렌트료 평균 및 예상 금액을 완벽 분석합니다. 보조금, 세금 혜택, 단점과 장점을 철저 비교하여 가장 저렴한곳을 찾아드립니다.",
+      "url": "https://example.com/kia-ev8-longterm-rental",
+      "mainEntity": {
+        "@type": "Product",
+        "name": "기아 EV8 장기렌트카 (Kia EV8 Long-term Rental)",
+        "description": "기아의 고성능 프리미엄 전기 세단 EV8 (프로젝트명 GT1) 장기렌트 서비스.",
+        "brand": {
+          "@type": "Brand",
+          "name": "기아 (KIA)"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "KRW",
+          "lowPrice": "700000",
+          "highPrice": "1200000",
+          "offerCount": "10"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>기아 EV8 장기렌트카 견적 비교 및 2026년 최저가 확보 전략</h1>
+            <p>eM 플랫폼 기반 차세대 프리미엄 전기세단의 합리적인 운용 가이드</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#intro">기아 EV8 소개</a></li>
+                <li><a href="#price_analysis">장기렌트 예상 금액</a></li>
+                <li><a href="#compare_buy">구매 방식 비교 및 장단점</a></li>
+                <li><a href="#subsidies">2026년 보조금 전망</a></li>
+                <li><a href="#strategy">최저가 업체 선별 요령</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <div class="sidebar">
+                <h2>실시간 자율 견적기</h2>
+                <div class="calculator-section">
+                    <h3>EV8 모의 견적 산출</h3>
+                    <p>원하시는 상세 세부 모델과 계약 조건을 입력하시면 즉시 예상 월 렌트료 평균 금액을 확인하실 수 있습니다.</p>
+                    
+                    <label for="rentalTrim">기아 EV8 트림 선택</label>
+                    <select id="rentalTrim" onchange="calculateRental()">
+                        <option value="62000000">EV8 에어 스탠다드 RWD (6,200만 원 선)</option>
+                        <option value="71000000" selected>EV8 어스 롱레인지 RWD (7,100만 원 선)</option>
+                        <option value="79000000">EV8 GT-Line AWD (7,900만 원 선)</option>
+                        <option value="88000000">기아 EV8 GT 듀얼모터 AWD (8,800만 원 선)</option>
+                    </select>
+
+                    <label for="rentalTerm">계약 기간 약정</label>
+                    <select id="rentalTerm" onchange="calculateRental()">
+                        <option value="36">36개월</option>
+                        <option value="48" selected>48개월</option>
+                        <option value="60">60개월</option>
+                    </select>
+
+                    <label for="rentalPrepay">선납금 비율 (소멸성)</label>
+                    <select id="rentalPrepay" onchange="calculateRental()">
+                        <option value="0" selected>무선납 (0%)</option>
+                        <option value="0.1">10%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.5">50%</option>
+                    </select>
+
+                    <label for="rentalDeposit">보증금 비율 (환급성)</label>
+                    <select id="rentalDeposit" onchange="calculateRental()">
+                        <option value="0" selected>무보증 (0%)</option>
+                        <option value="0.1">10%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.5">50%</option>
+                    </select>
+
+                    <label for="rentalMileage">연간 주행거리</label>
+                    <select id="rentalMileage" onchange="calculateRental()">
+                        <option value="1.0" selected>1만 km 이하</option>
+                        <option value="1.03">2만 km 이하</option>
+                        <option value="1.08">3만 km 이하</option>
+                        <option value="1.15">주행거리 무제한</option>
+                    </select>
+
+                    <label for="rentalAge">운전자 연령 범위</label>
+                    <select id="rentalAge" onchange="calculateRental()">
+                        <option value="1.0" selected>만 26세 이상 한정</option>
+                        <option value="1.08">만 21세 이상 한정</option>
+                    </select>
+
+                    <label>추가 옵션 구성</label>
+                    <div style="margin-top: 8px;">
+                        <input type="checkbox" id="optHdp" onchange="calculateRental()"> <span style="font-size: 0.9em;">EV8 자율주행 HDP 패키지</span><br>
+                        <input type="checkbox" id="optV2l" onchange="calculateRental()"> <span style="font-size: 0.9em;">EV8 V2L 아웃도어팩</span><br>
+                        <input type="checkbox" id="optCam" onchange="calculateRental()"> <span style="font-size: 0.9em;">EV8 빌트인캠 3 패키지</span><br>
+                        <input type="checkbox" id="optSound" onchange="calculateRental()"> <span style="font-size: 0.9em;">고급 오디오 시스템 옵션</span>
+                    </div>
+
+                    <div class="calc-output-box">
+                        <div class="calc-output-sub">예상 월 장기렌트료</div>
+                        <div class="calc-output-price" id="calcResultPrice">786,500 원</div>
+                        <div class="calc-output-sub">차량 총가액: <span id="calcResultCarPrice">71,000,000</span> 원</div>
+                        <div class="calc-output-sub">정부 보조금 감면액(예상): <span id="calcResultSubsidy">5,500,000</span> 원</div>
+                    </div>
+                </div>
+
+                <h2>장기렌트 전문 상담 신청</h2>
+                <div class="calculator-section">
+                    <p>다수의 캐피탈사 및 장기렌트 제휴 네트워크를 비교하여 고객 조건에 가장 알맞은 맞춤 순위와 혜택을 찾아드립니다.</p>
+                    <form action="#" method="POST" onsubmit="alert('상담 예약이 등록되었습니다. 담당 에이전트가 즉시 비교 견적 분석 후 연락드리겠습니다.'); return false;">
+                        <label for="consultName">고객 성함</label>
+                        <input type="text" id="consultName" placeholder="성함을 입력하세요" required>
+
+                        <label for="consultPhone">연락처</label>
+                        <input type="text" id="consultPhone" placeholder="010-XXXX-XXXX" required>
+
+                        <label for="consultTrim">관심 모델 트림</label>
+                        <select id="consultTrim">
+                            <option value="Standard">EV8 에어 스탠다드 (보급형)</option>
+                            <option value="Earth">EV8 어스 롱레인지 (권장사양)</option>
+                            <option value="GT-Line">EV8 GT-Line AWD (스포티)</option>
+                            <option value="GT">기아 EV8 GT (최상위 고성능)</option>
+                        </select>
+
+                        <label for="consultPre">희망 보증금 수준</label>
+                        <select id="consultPre">
+                            <option value="0">초기비용 전혀 없음 (무보증금)</option>
+                            <option value="20">보증금 20% 납부</option>
+                            <option value="30">보증금 30% 납부</option>
+                            <option value="pre30">선납금 30% 납부</option>
+                        </select>
+
+                        <label for="consultOption">희망 특전 형태</label>
+                        <select id="consultOption">
+                            <option value="cash">현금지원 및 주유 상품권 이벤트 혜택</option>
+                            <option value="gift">고급 썬팅 및 블랙박스 설치 사은품 증정</option>
+                            <option value="lowest">사은품 제외 월 렌트료 자체 최소화 설계</option>
+                        </select>
+
+                        <button type="submit">맞춤 비교 견적 신청</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 id="intro">기아 EV8: 스팅어의 혼을 계승하는 차세대 프리미엄 전기세단</h2>
+                <p>2026년 자동차 업계에서 가장 큰 기대를 받고 있는 모델 중 하나는 바로 기아가 선보이는 고성능 전기 스포츠 세단, 프로젝트명 GT1 즉 기아 EV8 입니다. 과거 스포티한 주행 감각과 날렵한 패스트백 디자인으로 수많은 매니아층을 형성했던 스팅어가 전동화 시대를 맞이하여 부활하게 된 것입니다. 기아 차세대 전기차 EV8 모델은 현대자동차그룹의 2세대 전기차 전용 플랫폼인 EV8 eM 플랫폼을 탑재하는 최초의 주자로서, 전기차 시장 전반의 기술적 혁신을 선도하는 플래그십 세단으로 평가받고 있습니다.</p>
+                <p>기아 전기차 EV8 사양에서 가장 두드러지는 점은 다름 아닌 압도적인 스펙입니다. 최대 113.2kWh에 달하는 대형 EV8 배터리 용량이 적용될 예정이어서, 1회 충전 시 실질적으로 달성 가능한 EV8 실주행거리는 700킬로미터에서 최대 800킬로미터 수준을 목표로 하고 있습니다. 이는 서울에서 부산까지 충전 없이 편안하게 왕복할 수 있는 전례 없는 수치입니다. 아울러 초고속 충전을 지원하는 EV8 800V 시스템 기술력이 적용되어 단 18분 만에 배터리 잔량을 대폭 확보할 수 있는 우수한 EV8 충전 속도 또한 지니고 있습니다.</p>
+                
+                <div class="highlight">
+                    <p>기아 EV8 핵심 경쟁력 정리: 차세대 eM 플랫폼을 적용하여 주행거리 성능을 극대화하였고, 합산 출력 612마력을 뿜어내는 듀얼 모터 시스템과 첨단 통합 소프트웨어를 통해 차별화된 고성능 드라이빙을 선사합니다.</p>
+                </div>
+
+                <p>구체적인 주행 제원 측면에서도 가공할 만한 퍼포먼스를 완성했습니다. 보급형인 EV8 후륜구동 RWD 트림은 싱글 모터 장착으로 215마력을 내며, 상위 EV8 사륜구동 AWD 및 EV8 GT-Line 모델은 듀얼 모터를 조합하여 한층 탄탄한 조종 안전성을 자랑합니다. 최상위 트림인 기아 EV8 GT 모델의 경우 듀얼 모터를 통해 최고 출력 612마력을 발휘하여, 정지 상태에서 시속 100킬로미터까지 도달하는 시간인 제로백 성능이 3초 초반대에 불과한 고성능 스포츠카급 EV8 모터 성능을 완성했습니다. 여기에 스마트 크루즈 컨트롤을 넘어선 EV8 자율주행 기술과 차량 소프트웨어를 상시 최적 상태로 관리하는 EV8 무선 업데이트 기술, 전자기기를 차량 전력으로 자유롭게 사용하는 EV8 V2L 기능 및 빌트인 세대의 최신판인 EV8 빌트인캠 등 혁신 사양이 빼곡히 장착된 EV8 풀옵션 차량에 대한 관심이 급증하고 있습니다.</p>
+
+                <h2 id="price_analysis">기아 EV8 장기렌트카 가격 분석: 월 평균 예상 납입 금액과 실무 견적</h2>
+                <p>기아 프리미엄 전기세단 EV8 구매를 앞두고 예비 오너분들이 가장 고민하는 부분은 바로 월 납입 금액과 실제 운용 비용입니다. 아직 정식 가격이 확정되기 전이지만, 업계에서는 보조금 혜택을 적용받기 전 기본 가격대를 트림에 따라 최소 6,000만 원대에서 최고 8,000만 원 중후반대로 조심스럽게 예측하고 있습니다. 수입 고성능 전기차 브랜드의 대표 주자인 포르쉐 타이칸의 절반 수준에 상응하는 합리적인 가격대이면서도 고출력 성능을 경험할 수 있는 뛰어난 가성비를 보유하고 있습니다.</p>
+                <p>고가의 친환경 전용 전기차를 초기 비용 없이 가장 경제적으로 운용하고자 할 때 현명한 대안이 바로 기아 EV8 장기렌트카 입니다. 장기렌트의 경우 매달 납부하는 정기 렌트료 내에 차량 이용 대금은 물론 취등록세, 공채 비용, 매년 발생하는 세금 혜택과 자동차 보험료까지 일체 통합되어 산출되므로 전반적인 지출 흐름을 관리하기 매우 용이합니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기아 EV8 트림명</th>
+                            <th>예상 차량 가격 (보조금 전)</th>
+                            <th>무보증 48개월 월 예상 렌트료</th>
+                            <th>보증금 30% 48개월 월 예상 렌트료</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EV8 에어 스탠다드 RWD</td>
+                            <td>약 6,200만 원</td>
+                            <td>월 평균 75만 원 내외</td>
+                            <td>월 평균 64만 원 내외</td>
+                        </tr>
+                        <tr>
+                            <td>EV8 어스 롱레인지 RWD</td>
+                            <td>약 7,100만 원</td>
+                            <td>월 평균 89만 원 내외</td>
+                            <td>월 평균 74만 원 내외</td>
+                        </tr>
+                        <tr>
+                            <td>EV8 GT-Line AWD</td>
+                            <td>약 7,900만 원</td>
+                            <td>월 평균 102만 원 내외</td>
+                            <td>월 평균 88만 원 내외</td>
+                        </tr>
+                        <tr>
+                            <td>기아 EV8 GT 듀얼모터 AWD</td>
+                            <td>약 8,800만 원</td>
+                            <td>월 평균 118만 원 내외</td>
+                            <td>월 평균 99만 원 내외</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>상기 수치는 이해를 돕기 위한 예시이며 실제 가입 조건, 연령대, 연간 약정 거리 설정에 따라 월 렌트료 차이점이 발생할 수 있습니다. 장기렌트카 이용 시 무보증 조건으로 진행하게 되면 전액 보조금을 바탕으로 초기 투입 예산 없이 신형 기아 차세대 전기차 EV8 차량을 인수하여 탈 수 있지만, 계약 중간에 보증금 제도를 적절히 연동하여 담보율을 올리면 매월 납부해야 할 고정 금액을 눈에 띄게 절약할 수 있습니다.</p>
+
+                <div class="cost-reduction-graph">
+                    <h4>보증금 설정 비율에 따른 월 예상 렌트료 할인율 변동 트렌드</h4>
+                    <p>인수 보증금을 높게 가입할수록 연금리 수준의 금리 할인 우대가 복리로 녹아들어 최종 견적서의 경쟁력이 매우 올라갑니다. 장기렌트 전문 업체 순위 비교 시 반드시 확인해 보아야 할 핵심 구조입니다.</p>
+                    <div class="graph-container">
+                        <div class="graph-row">
+                            <span class="graph-label">보증금 무설정 (0%)</span>
+                            <div class="graph-bar-wrap">
+                                <div class="graph-bar bar-1" style="width: 100%;"></div>
+                            </div>
+                            <span class="graph-val">월 89만 원</span>
+                        </div>
+                        <div class="graph-row">
+                            <span class="graph-label">보증금 10% 설정</span>
+                            <div class="graph-bar-wrap">
+                                <div class="graph-bar bar-2" style="width: 92%;"></div>
+                            </div>
+                            <span class="graph-val">월 82만 원</span>
+                        </div>
+                        <div class="graph-row">
+                            <span class="graph-label">보증금 30% 설정</span>
+                            <div class="graph-bar-wrap">
+                                <div class="graph-bar bar-3" style="width: 83%;"></div>
+                            </div>
+                            <span class="graph-val">월 74만 원</span>
+                        </div>
+                        <div class="graph-row">
+                            <span class="graph-label">보증금 50% 설정</span>
+                            <div class="graph-bar-wrap">
+                                <div class="graph-bar bar-4" style="width: 72%;"></div>
+                            </div>
+                            <span class="graph-val">월 64만 원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="compare_buy">신차 직접 구매 vs 장기렌트카 완벽 비교 분석: 주요 장단점</h2>
+                <p>새 차를 구매할 때 신용대출이나 장기 할부, 혹은 일시불을 활용하는 직접 소유 방식과 매월 빌려 타는 장기렌트카 운용 방식 사이에서 갈등하는 예비 구매자분들이 대다수입니다. 두 가지 차량 구매 솔루션은 재정적인 관점과 관리의 편리함 측면에서 명확한 장단점 차이점을 보여줍니다. 특히 감가상각 하락 리스크가 다소 강한 순수 전기 세단의 특성을 고려하면 각각의 구조적 가치는 사뭇 다릅니다.</p>
+
+                <h3>직접 구매와 장기렌트 비교 분석 일람</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>비교 항목</th>
+                            <th>본인 명의 직접 구매 (할부/일시불)</th>
+                            <th>장기렌트카 운용 방식</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>초기 투입 예산</td>
+                            <td>EV8 취등록세 (차량가 약 7%), 취득 공채비, 초기 1년치 자동차 보험료 전액 직접 부담</td>
+                            <td>보증 조건 승인 시 초기 비용 0원으로 즉시 출고 가능, 모든 세금과 보험이 렌트료에 내포됨</td>
+                        </tr>
+                        <tr>
+                            <td>보험 이력 및 관리</td>
+                            <td>운전자 본인의 요율 적용. 사고 발생 시 다음 해 보험료 할증 우려 및 사고 이력 잔존</td>
+                            <td>렌터카 회사 명의 단체 보험 가입. 무제한 사고가 나도 월 렌트료 변동 및 개인 보험 할증 일절 없음</td>
+                        </tr>
+                        <tr>
+                            <td>재산세 및 건강보험</td>
+                            <td>개인 자산 증가로 잡혀 지역 건강보험료 인상 요인 발생, 신용 대출 한도 축소 가능성</td>
+                            <td>임대 차량이므로 자산으로 산정되지 않음. 대출 규제 영향이 전혀 없는 완전 금융 오프 발란스</td>
+                        </tr>
+                        <tr>
+                            <td>전기차 배터리 리스크</td>
+                            <td>수년 뒤 배터리 효율 저하 및 하이브리드/전기차 중고 시세 급락 시 감가손실 전액 본인 감수</td>
+                            <td>만기 시점에 시세 비교 후 인수가 유리하면 인수, 시세 폭락 시 위약금 없이 반납하면 리스크 소멸</td>
+                        </tr>
+                        <tr>
+                            <td>차량 번호판</td>
+                            <td>일반 승용 번호판 부착 (사회적 체면 고려 가능)</td>
+                            <td>렌터카 전용 번호판 (하, 허, 호) 필수 적용</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>장점 측면을 요약하자면, 기아 EV8 장기렌트카 서비스는 초기 자본금이 한 푼도 들어가지 않는 무보증 가입 조건 설계가 수월하며 개인 신용 정보에 부채 항목으로 기록되지 않습니다. 또한 복잡한 EV8 세금 혜택 계산이나 매년 고지되는 지방세를 일일이 납부할 번거로움이 없습니다. 사고 처리 과정에서도 정해진 소액의 면책금만 납부하면 렌트사에서 알아서 모든 외판 수리 및 처리를 대행해 줍니다.</p>
+                <p>반면 단점 역시 명확히 이해해야 합니다. 계약 기간 동안 개인의 무사고 운전 경력이 보험 경력으로 인정받지 못해 나중에 개인 보험으로 전환할 때 불이익이 생길 수 있고, 렌트 기간 도중 부득이하게 중도 해지할 경우 위약금 수수료 비용이 제법 높게 과금됩니다. 따라서 계약 체결 전에 자신의 평소 주행 습관, 연간 평균 이동 거리, 재무적 예산을 완벽히 수립하여 전문가와 정교한 설계를 이끌어내야만 중도 반납 리스크를 피할 수 있습니다.</p>
+
+                <h2 id="subsidies">2026년 전기차 보조금 및 세제 혜택에 따른 영향 분석</h2>
+                <p>올해인 2026년 무공해차 통합누리집 정부 정책에 따르면 고성능 프리미엄 전기차 부문의 지원금 세부 지침이 해마다 촘촘하게 변경되고 있습니다. 고가 차량에 대한 지급 비율 조정이 들어갔기 때문에 가격 구간 설계에 따라 기아 EV8 보조금 최종 수령액이 크게 요동칠 수 있는 여건입니다. 통상적으로 차량 기본 공급 가격이 일정 선을 넘어가면 보조금이 50% 수준으로 감액되거나 아예 배제될 수 있습니다.</p>
+                <p>하지만 대량 구매 특판 계약을 주로 담당하는 신차 장기렌트 전문 업체를 통하면 개인 구매보다 훨씬 기민하게 세금 혜택을 사전에 확보할 수 있습니다. 렌터카 제조사 대량 출고 물량은 지방자치단체별 보조금 소진 속도에 큰 제한을 받지 않고 우선적으로 차량 인도가 이루어지는 특수 쿼터제가 가동되기 때문입니다. 법인 및 대형 다이렉트 캐피탈사가 매입 시점에 확보해 둔 EV8 보조금 단가를 미리 선반영하여 장기렌트 월 료를 정교하게 깎아주기 때문에, 개인이 직접 신청하여 대기하는 수고를 덜어준다는 점에서도 인기가 높습니다.</p>
+
+                <h2 id="strategy">기아 EV8 장기렌트카 최저가 견적을 도출하는 싼곳 선별 요령</h2>
+                <p>수많은 신차 에이전트 및 장기렌트 전문 업체들이 시장에서 각축전을 벌이고 있어 최적의 싼곳 혹은 진정으로 저렴한곳을 찾아내기란 결코 만만치 않은 작업입니다. 소비자 입장에서는 무작정 광고에 명시된 최저 가격 표기에만 현혹되지 않고, 숨겨진 세부 약정 조항을 현명하게 비교해야만 차후에 손해가 발생하지 않습니다.</p>
+
+                <h3>1. 다이렉트 캐피탈 순위 비교 솔루션 활용</h3>
+                <p>동일한 사양의 기아 EV8 차량일지라도 각 금융사나 캐피탈 업체(예: 현대캐피탈, KB캐피탈, 우리금융캐피탈 등)가 분기별로 내세우는 특별 이율 조건과 중고차 잔존가치 책정 비율이 상이합니다. 잔존가치가 높게 책정될수록 월별 납입하는 비용 부담은 가벼워지므로, 최상의 순위에 랭크된 1선 캐피탈사들의 다이렉트 견적을 실시간으로 취합해 비교해 주는 종합 전문 에이전시를 이용하는 것이 현명합니다.</p>
+
+                <h3>2. 신규 가입 혜택 및 현금지원 이벤트 조건 따져보기</h3>
+                <p>최근 인터넷 자동차 매니아층 사이에서 널리 알려진 네이버 카페나 디시인사이드 장기렌트 전용 커뮤니티 등의 리얼 후기를 참고하면, 신규 가입 시 에이전트 측에서 제공하는 혜택의 성격도 제법 다르다는 것을 알 수 있습니다. 일부 업체는 전면 유리에 선팅 시공 및 블랙박스 설치 사은품 증정을 강점으로 세우고, 또 다른 전문 업체는 모바일 백화점 상품권이나 직접적인 주유 할인 주유권, 주말 여행용 사은 가방 제공, 심지어 정해진 규정에 맞춘 합법적인 수준의 캐시백 현금지원 지원금 보전 프로모션을 전면으로 앞세우며 이벤트를 펼치기도 합니다. 이 모든 이벤트를 꼼꼼하게 저울질하여 자신의 필요성에 정확히 안착하는 곳을 고르는 지혜가 요구됩니다.</p>
+
+                <h3>3. 디지털 플랫폼 및 AI 기반 데이터 분석의 도움</h3>
+                <p>최근에는 구글, 유튜브 검색창에 기아 EV8 장기렌트 단점 장점 키워드를 조회하기만 해도 업자들의 과장 섞인 광고글 대신에 사용자들이 실제로 업로드해 놓은 내돈내산 추천 영상을 손쉽게 찾을 수 있습니다. 뿐만 아니라 트위터, 인스타그램, 페이스북과 같은 소셜 소통 채널을 통해서도 실시간 실물 이미지와 함께 할인 꿀팁 정보가 지속적으로 업데이트되고 있습니다. 특히 정보 검색의 효율을 배가시키려면 최근 두각을 나타내고 있는 생성형 인공지능 도구인 챗지피티(ChatGPT)나 구글의 제미나이(Gemini, 제미나이) 등의 고성능 AI 에이전트를 적극적으로 응용해 보시기 바랍니다. 여러 다이렉트 견적 사이트의 복잡한 조건들을 수집해 가장 가성비가 높은 장기렌트 업체의 평판과 세부 할인 내역을 요약해 달라고 요청하면 복잡한 가입 절차를 일일이 대조하지 않아도 매우 빠르고 명확하게 최저가 구간을 판독해 줍니다.</p>
+
+                <h2 id="faq">기아 EV8 장기렌트카 관련 자주 묻는 질문 (FAQ)</h2>
+
+                <p>장기렌트를 계약하기 전에 잠재 소비자들이 가장 공통적으로 해소하고자 하는 쟁점 질문들을 투명하게 추려 답변해 드립니다.</p>
+
+                <h4>질문: 계약 중도에 기아 EV8 장기렌트카 차량을 인수한 뒤 제 명의로 완전히 이전할 수 있나요?</h4>
+                <p>답변: 네 가능합니다. 통상 계약 기간이 끝나는 약정 시점(예: 36개월 혹은 48개월 만기 시)에 최초 보증서 계약 당시에 기재되어 있던 약정 만기 잔존가치를 전액 납부하신 후 개인 명의로 이전하여 온전히 평생 소유할 수 있습니다. 반대로 만약 해당 시점에 전기차 중고 시세가 심각하게 낮게 하락해 있거나 배터리 보증 기간 만료로 감가가 심하다면 이전 인수를 포기하고 즉시 반납 처리하셔도 아무런 재정적 패널티를 물지 않습니다.</p>
+
+                <h4>질문: 매년 책정되는 자동차 종합 보험료는 개인 할인 요율이 적용되나요?</h4>
+                <p>답변: 아닙니다. 장기렌트카의 주된 강점 중 하나는 렌터카 사업체 명의의 일괄 대형 단체 영업 요율로 보험이 자동 가입된다는 점입니다. 따라서 평소 개인 사고 이력이 잦아 자차보험료나 종합 보험 요금 할증이 매우 크게 올라와 있는 젊은 초보 운전자나 고연령층 운전자라고 할지라도 대단히 안정적인 저가 공동 요금 혜택을 혜택 그대로 누릴 수 있습니다. 또한 운전 중에 수차례 크고 작은 대인 대물 접촉 사고를 유발하게 되더라도 사전에 지정된 정액 수준의 소액 면책금만 한 번 지불하면 월 렌트료의 할증 상승이 전혀 이루어지지 않습니다.</p>
+
+                <h4>질문: EV8 GT 고성능 모델의 612마력 스포츠 세단 성향이 장기렌트 운행 시 유의할 점이 있나요?</h4>
+                <p>답변: 고출력 스포츠 세단은 특유의 파워풀한 성능만큼 타이어 소모 및 패드 교체 주기가 상대적으로 빠를 수 있습니다. 이를 관리해 주는 정비 포함형(소모품 정비 풀케어 패키지) 장기렌트 옵션을 별도로 추가 가입할 것인지, 아니면 단순히 렌트료를 극한으로 깎고 타이어 등은 개인이 공임나라 등을 이용하여 자가 정비할 것인지를 사전에 꼼꼼히 조율하시는 것을 추천합니다.</p>
+
+                <h4>질문: 전기차 보조금은 개인이 별도로 지자체에 접수해야 하나요?</h4>
+                <p>답변: 아닙니다. 장기렌트 계약 체결 시 임대 전담 캐피탈사에서 번거로운 서류 구비 및 각 지자체별 전기차 특별 지원금 예산 한도 파악 및 대리 신청 업무를 전부 일괄 전담하여 깔끔하게 정리해 줍니다. 최종적으로 고객이 받아보게 될 최종 제안서나 실질 렌트료 산출 세부 내역서에 보조금 해당 감면액이 이미 100% 공제 계산되어 발부되므로 복잡한 신청 대기 기간을 감수할 필요가 전혀 없어 매우 스마트하게 차를 출고할 수 있습니다.</p>
+
+                <div class="external-links">
+                    <h3>공신력 있는 정부 부처 및 유관 기관 정보 출처</h3>
+                    <p>기아 EV8 장기렌트카 계약 및 무공해 친환경차 혜택 등 투명하고 검증된 추가 핵심 자료를 직접 검증해 보고 싶으시다면 아래의 공식 신뢰 기관 정보를 참고하시기 바랍니다.</p>
+                    <ul>
+                        <li><a href="https://www.molit.go.kr/" target="_blank" title="국토교통부 바로가기">국토교통부: 국내 자동차 등록 대수 현황 및 장기렌트 리스 자동차 번호판 관련 정식 제도 조항 안내</a></li>
+                        <li><a href="https://www.ev.or.kr/" target="_blank" title="환경부 무공해차 통합누리집 바로가기">환경부 무공해차 통합누리집: 2026년 최신 국고 보조금 단가 및 지자체별 소진 잔여 현황 확인</a></li>
+                        <li><a href="https://www.kia.com/" target="_blank" title="기아 공식 홈페이지 바로가기">기아 공식 홈페이지: 차세대 전기 세단 EV8 카탈로그 및 트림 옵션별 제원 정보 제공</a></li>
+                        <li><a href="https://www.koroad.or.kr/" target="_blank" title="도로교통공단 바로가기">도로교통공단: 초보 운전자 안전 의무 제도 및 친환경 고출력 EV 세단 도로 안전 수칙 안내</a></li>
+                        <li><a href="https://www.kotsa.or.kr/" target="_blank" title="한국교통안전공단 바로가기">한국교통안전공단: 전기자동차 배터리 안전 진단 검사 및 전용 플랫폼 리콜 현황 안내</a></li>
+                        <li><a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20EV8" target="_blank" title="나무위키 기아 EV8 문서 바로가기">나무위키 기아 EV8: 코드명 GT1 프로젝트 히스토리 및 탑재 배터리 상세 연동 스펙 백과사전</a></li>
+                    </ul>
+                </div>
+
+                <p style="text-align: right; color: var(--text-muted); font-size: 0.85em; margin-top: 60px;">정보 콘텐츠 최종 편집일: 2026년 5월 25일 (기아 EV8 최신 소식 전면 반영)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 자율 견적 연동을 위한 인터랙티브 연산 함수
+        function calculateRental() {
+            const trimSelect = document.getElementById('rentalTrim');
+            const basePrice = parseInt(trimSelect.value);
+            
+            let optionPrice = 0;
+            if(document.getElementById('optHdp').checked) optionPrice += 2500000;
+            if(document.getElementById('optV2l').checked) optionPrice += 1200000;
+            if(document.getElementById('optCam').checked) optionPrice += 1500000;
+            if(document.getElementById('optSound').checked) optionPrice += 1800000;
+            
+            // 2026년 예상 전기차 국고+지자체 평균 보조금 책정액
+            const subsidy = 5500000;
+            const totalCarPrice = basePrice + optionPrice;
+            
+            // 차량가에서 보조금 공제한 실질 렌트 산출 기준가액
+            const adjustedPrice = Math.max(30000000, totalCarPrice - subsidy);
+            
+            const termSelect = document.getElementById('rentalTerm');
+            const term = parseInt(termSelect.value);
+            
+            const prepaySelect = document.getElementById('rentalPrepay');
+            const prepayRate = parseFloat(prepaySelect.value);
+            
+            const depositSelect = document.getElementById('rentalDeposit');
+            const depositRate = parseFloat(depositSelect.value);
+            
+            const mileageSelect = document.getElementById('rentalMileage');
+            const mileageFactor = parseFloat(mileageSelect.value);
+            
+            const ageSelect = document.getElementById('rentalAge');
+            const ageFactor = parseFloat(ageSelect.value);
+            
+            // 렌트 계약 기간에 따른 기간별 잔존가치 연동 기본 계수
+            let termFactor = 0.022; // 36개월 기준
+            if (term === 48) termFactor = 0.018;
+            else if (term === 60) termFactor = 0.015;
+            
+            // 월 기본 렌트료 베이스 도출
+            let monthlyBase = adjustedPrice * termFactor;
+            
+            // 선납금 납부에 따른 선공제 할인액 반영 (월 부담액을 낮추는 역할)
+            const prepaidAmount = adjustedPrice * prepayRate;
+            const prepayReduction = prepaidAmount / term;
+            
+            // 보증금 납부에 따른 금리 감면 할인 혜택 반영 (연 4% 이자 절감으로 시뮬레이션)
+            const depositAmount = adjustedPrice * depositRate;
+            const depositReduction = (depositAmount * 0.04) / 12;
+            
+            let estimatedMonthly = (monthlyBase - prepayReduction - depositReduction) * mileageFactor * ageFactor;
+            
+            // 한도 보정 최소 월 렌트 제한 설정
+            if (estimatedMonthly < 150000) estimatedMonthly = 150000;
+            
+            // 수치 포맷 처리 및 화면 반영
+            const formattedAmount = Math.round(estimatedMonthly).toLocaleString();
+            const formattedTotalCar = totalCarPrice.toLocaleString();
+            const formattedSubsidy = subsidy.toLocaleString();
+            
+            document.getElementById('calcResultPrice').innerText = formattedAmount + ' 원';
+            document.getElementById('calcResultCarPrice').innerText = formattedTotalCar;
+            document.getElementById('calcResultSubsidy').innerText = formattedSubsidy;
+        }
+
+        // 초기 페이지 진입 시 자동으로 렌트 연산 실행
+        window.onload = function() {
+            calculateRental();
+        };
+    </script>
+  
